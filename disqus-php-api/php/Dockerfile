@@ -6,6 +6,7 @@ RUN set -x \
     && apt update \
     && apt install --no-install-recommends --no-install-suggests -y git \
     && git clone https://github.com/fooleap/disqus-php-api \
+    && cd /root \
     && cp -r ./disqus-php-api/api/* /var/www/html/ \
     && sed -i "s#'PUBLIC_KEY', ''#'PUBLIC_KEY', getenv('PUBLIC_KEY')#g" /var/www/html/config.php \
     && sed -i "s#'SECRET_KEY', ''#'SECRET_KEY', getenv('SECRET_KEY')#g" /var/www/html/config.php \
