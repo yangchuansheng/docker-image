@@ -44,10 +44,6 @@ Disqus PHP API
 创建容器：
 
 ```bash
-
-创建容器：
-
-```bash
 🐳  →  docker run -d -e PUBLIC_KEY=... -e SECRET_KEY=... -e USERNAME=... -e EMAIL=... -e PASSWD=... -e WEBSITE=... -e SHORTNAME=... yangchuansheng/disqus-php
 ```
 
