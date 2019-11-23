@@ -29,6 +29,28 @@ Disqus PHP API
 * 依赖于 PHP 5.6+，采用 PHP cURL 请求 Disqus API，以获取评论数据，发送访客评论等操作。
 * 配置文件为 `config.php`，有简单说明。
 
+## 镜像使用方法
+
+通过环境变量传入公钥私钥等相关信息，必须包含以下几个环境变量：
+
++ PUBLIC_KEY：即 Applications->Details->API Key
++ SECRET_KEY：即 Applications->Details->API Secret
++ USERNAME：即 Settings->Account->Username
++ EMAIL：即 Settings->Account->Email
++ PASSWD：disqus 登录密码
++ WEBSITE：即 Applications->Settings->Website
++ SHORTNAME: 即 Admin->Settings->General->Shortname
+
+创建容器：
+
+```bash
+
+创建容器：
+
+```bash
+🐳  →  docker run -d -e PUBLIC_KEY=... -e SECRET_KEY=... -e USERNAME=... -e EMAIL=... -e PASSWD=... -e WEBSITE=... -e SHORTNAME=... yangchuansheng/disqus-php
+```
+
 ### 重要
 
 必须在 [Disqus API](https://disqus.com/api/applications/) 申请注册一个 App，取得相关的公钥（**API Key**）、私钥（**API Secret**），并填写于后端的配置文件 `config.php` 中。
