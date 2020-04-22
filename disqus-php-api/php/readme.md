@@ -64,7 +64,7 @@ App 设置方面，回调链接请填写 `login.php` 文件的绝对地址，主
 
 ## 前端
 
-DEMO: http://blog.fooleap.org/disqus-php-api.html
+DEMO: https://fuckcloudnative.io
 
 项目将 Disqus 原生评论框加载代码打包在内，若使用本评论框，需将网页上所有与 Disqus 相关的元素清除，例如 id 为 `disqus_thread` 的容器、`disqus_config` 函数等。
 
