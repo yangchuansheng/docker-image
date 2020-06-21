@@ -2,11 +2,11 @@ FROM php:7.3-fpm
 
 LABEL maintainer="disqus-php-api Docker Maintainers https://fuckcloudnative.io"
 
-RUN set -x \
+RUN set -x; \
     apt update; \
     apt install --no-install-recommends --no-install-suggests -y git; \
-    git clone https://github.com/fooleap/disqus-php-api; \
     cd /root; \
+    git clone https://github.com/fooleap/disqus-php-api; \
     cp -r ./disqus-php-api/api/* /var/www/html/; \
     sed -i "s#cn.gravatar.com#cdn.staticdn.net#g" $(egrep -rl "cn.gravatar.com" /var/www/html/); \
     sed -i "s#a.disquscdn.com/images/noavatar92.png#cdn.jsdelivr.net/gh/yangchuansheng/imghosting/img/20200621114024.png#g" $(egrep -rl "a.disquscdn.com" /var/www/html/); \
