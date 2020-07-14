@@ -39,5 +39,5 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: yangchuansheng/wireguard_exporter
-        tags: latest
+        tags: rust
         path: wireguard_exporter
