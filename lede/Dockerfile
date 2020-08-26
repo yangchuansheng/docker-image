@@ -21,3 +21,6 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LANG zh_CN.utf8
 
 COPY --from=builder / /
+COPY start.sh /
+
+ENTRYPOINT ["/start.sh"]
