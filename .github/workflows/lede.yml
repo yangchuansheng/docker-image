@@ -38,7 +38,7 @@ jobs:
       env:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
-      run: echo $password | docker login ghcr.io -u $username --password-stdin
+      run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin
 
     # Runs a single command using the runners shell
     - name: Build and push Docker images
