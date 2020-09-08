@@ -35,11 +35,10 @@ jobs:
     - uses: actions/checkout@v2
   
     - name: Login to GitHub Package Registry
-      uses: yangchuansheng/login-action@master
-      with:
-        registry: ghcr.io
+      env:
         username: ${{ github.repository_owner }}
-        password: ${{ secrets.GHCR_TOKEN }} 
+        password: ${{ secrets.GHCR_TOKEN }}
+      run: echo $password | docker login ghcr.io -u $username --password-stdin
 
     # Runs a single command using the runners shell
     - name: Build and push Docker images
