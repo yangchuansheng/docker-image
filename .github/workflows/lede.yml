@@ -46,6 +46,8 @@ jobs:
       with:
         registry: ghcr.io
         repository: ${{ github.repository_owner }}/lede
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
         tags: latest
         dockerfile: 'lede/Dockerfile'
         path: lede
