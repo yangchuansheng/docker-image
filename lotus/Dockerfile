@@ -1,6 +1,8 @@
 FROM golang AS builder
 LABEL maintainer="lotus Docker Maintainers https://fuckcloudnative.io"
 
+WORKDIR /src
+
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
@@ -66,11 +68,11 @@ COPY --from=builder /usr/lib/gcc/x86_64-linux-gnu/8/libgcc_s.so.1 /lib/libgcc_s.
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /lib/libOpenCL.so.1
 
 # PID1 tini
-COPY --from=builder tini /usr/local/bin/tini
+COPY --from=builder /src/tini /usr/local/bin/tini
 
 # Lotus bin && entrypoint script
 COPY --from=builder $rep_dir/lotus /usr/local/bin/lotus
-COPY --from=builder daemon-entrypoint.sh /usr/local/bin/daemon-entrypoint.sh
+COPY --from=builder /src/daemon-entrypoint.sh /usr/local/bin/daemon-entrypoint.sh
 
 # Lotus sync port
 EXPOSE 2333
