@@ -8,7 +8,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     LOTUS_REP=https://github.com/filecoin-project/lotus.git \
     BRANCH=master \
     COMMIT=HEAD \
-    REPO_DIR=lotus-$BRANCH
+    REPO_DIR=lotus
 
 RUN apt update; \
     apt install -y mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl; \
