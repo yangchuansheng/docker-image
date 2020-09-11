@@ -11,7 +11,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     REPO_DIR=lotus
 
 RUN apt update; \
-    apt install -y mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl; \
+    apt install -y mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang; \
     apt upgrade -y 
 
 
