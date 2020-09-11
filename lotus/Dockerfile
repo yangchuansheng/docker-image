@@ -69,7 +69,7 @@ COPY --from=builder /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /lib/libOpenCL.so.1
 COPY --from=builder /go/tini /usr/local/bin/tini
 
 # Lotus bin && entrypoint script
-COPY --from=builder $rep_dir/lotus /usr/local/bin/lotus
+COPY --from=builder $REPO_DIR/lotus /usr/local/bin/lotus
 COPY --from=builder /go/daemon-entrypoint.sh /usr/local/bin/daemon-entrypoint.sh
 
 # Lotus sync port
