@@ -41,7 +41,7 @@ jobs:
       run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin
 
     # Runs a single command using the runners shell
-    - name: Build and push Docker images
+    - name: Build and push Docker images to ghcr.io
       uses: docker/build-push-action@v1.1.0
       with:
         registry: ghcr.io
@@ -49,5 +49,14 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
         tags: latest
+        dockerfile: 'lotus/Dockerfile'
+        path: lotus
+
+    - name: Build and push Docker images to docker.io
+      uses: docker/build-push-action@v1.1.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: yangchuansheng/lotus
         dockerfile: 'lotus/Dockerfile'
         path: lotus
