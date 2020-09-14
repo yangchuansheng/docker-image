@@ -43,8 +43,7 @@ RUN git clone --depth=1 -b $BRANCH $LOTUS_REP $REPO_DIR; \
     git submodule init; \
     git submodule update; \
     sed -i 's/"check_cpu_for_feature": null/"check_cpu_for_feature": "sha_ni"/g' extern/filecoin-ffi/rust/rustc-target-features-optimized.json; \
-    env RUSTFLAGS='-C target-cpu=native -g' FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all lotus-bench; \
-    chmod +x lotus;
+    env RUSTFLAGS='-C target-cpu=native -g' FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all lotus-bench;
 
 RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
     chmod +x tini; \
@@ -70,7 +69,7 @@ COPY --from=builder /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /lib/libOpenCL.so.1
 COPY --from=builder /go/tini /usr/local/bin/tini
 
 # Lotus bin && entrypoint script
-COPY --from=builder /go/$REPO_DIR/lotus /usr/local/bin/lotus
+COPY --from=builder /go/$REPO_DIR/lotus/lotus /usr/local/bin/lotus
 COPY --from=builder /go/daemon-entrypoint.sh /usr/local/bin/daemon-entrypoint.sh
 
 # Lotus sync port
