@@ -51,12 +51,9 @@ jobs:
         tags: latest
         dockerfile: 'lotus/Dockerfile'
         path: lotus
-
-    - name: Build and push Docker images to docker.io
-      uses: docker/build-push-action@v1.1.0
-      with:
+        
+    - name: Push Docker images to docker.io
+      env:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: yangchuansheng/lotus
-        dockerfile: 'lotus/Dockerfile'
-        path: lotus
+      run: echo ${{ env.password }} | docker login docker.io -u ${{ env.username }} --password-stdin; docker tag ghcr.io/yangchuansheng/lotus:latest yangchuansheng/lotus:latest; docker push yangchuansheng/lotus:latest 
