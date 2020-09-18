@@ -1,0 +1,59 @@
+#=================================================
+# https://github.com/yangchuansheng/docker-image
+# Description: Build and push lotus Docker image
+# Lisence: MIT
+# Author: Ryan
+# Blog: https://fuckcloudnative.io
+#=================================================
+
+name: Build and push lotus miner Docker image
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+    paths: 
+      - 'lotus/Dockerfile.miner'
+  pull_request:
+    branches: [ master ]
+    paths: 
+      - 'lotus/Dockerfile.miner'
+  watch:
+    types: started
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+  
+    - name: Login to GitHub Package Registry
+      env:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
+      run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin
+
+    # Runs a single command using the runners shell
+    - name: Build and push Docker images to ghcr.io
+      uses: docker/build-push-action@v1.1.0
+      with:
+        registry: ghcr.io
+        repository: ${{ github.repository_owner }}/lotus-miner
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
+        tags: latest
+        dockerfile: 'lotus/Dockerfile.miner'
+        path: lotus
+        
+    - name: Push Docker images to docker.io
+      env:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+      run: echo ${{ env.password }} | docker login docker.io -u ${{ env.username }} --password-stdin; docker tag ghcr.io/yangchuansheng/lotus-miner:latest yangchuansheng/lotus-miner:latest; docker push yangchuansheng/lotus-miner:latest 
