@@ -1,0 +1,67 @@
+#=================================================
+# https://github.com/yangchuansheng/docker-image
+# Description: Build and push octant Docker image
+# Lisence: MIT
+# Author: Ryan
+# Blog: https://fuckcloudnative.io
+#=================================================
+
+name: Build and push octant Docker image
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+    paths: 
+      - 'octant/Dockerfile'
+  pull_request:
+    branches: [ master ]
+    paths: 
+      - 'octant/Dockerfile'
+  watch:
+    types: started
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    - name: Build and push Docker images to docker.io
+      uses: docker/build-push-action@v1.1.0
+      with:
+        registry: docker.io
+        repository: yangchuansheng/octant
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: latest
+        dockerfile: 'octant/Dockerfile'
+        path: octant
+
+    - name: Update repo description
+      uses: peter-evans/dockerhub-description@v2
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKERHUB_REPOSITORY: yangchuansheng/octant
+        README_FILEPATH: octant/README.md
+
+    - name: Login to GitHub Package Registry
+      env:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
+      run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin
+        
+    - name: Push Docker images to ghcr.io
+      env:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
+      run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin; docker tag yangchuansheng/octant-daemon:latest ghcr.io/yangchuansheng/octant-daemon:latest; docker push ghcr.io/yangchuansheng/octant-daemon:latest 
