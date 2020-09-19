@@ -64,4 +64,4 @@ jobs:
       env:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
-      run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin; docker tag docker.io/yangchuansheng/octant-daemon:latest ghcr.io/yangchuansheng/octant-daemon:latest; docker push ghcr.io/yangchuansheng/octant-daemon:latest 
+      run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin; docker tag yangchuansheng/octant:latest ghcr.io/yangchuansheng/octant:latest; docker push ghcr.io/yangchuansheng/octant:latest 
