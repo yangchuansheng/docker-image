@@ -43,17 +43,17 @@ RUN git clone --depth=1 -b $BRANCH $LOTUS_REP $REPO_DIR; \
     git submodule init; \
     git submodule update; \
     sed -i 's/"check_cpu_for_feature": null/"check_cpu_for_feature": "sha_ni"/g' extern/filecoin-ffi/rust/rustc-target-features-optimized.json; \
-    env RUSTFLAGS='-C target-cpu=native -g' FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all lotus-bench;
+    env RUSTFLAGS='-C target-cpu=native -g' FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean && make lotus;
 
 RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
-    chmod +x tini; \
-    curl -sOL https://raw.githubusercontent.com/aimkiray/lotus-docker/master/daemon-entrypoint.sh; \
-    chmod +x daemon-entrypoint.sh;
+    chmod +x tini; 
 
-FROM busybox:glibc
+FROM gcr.io/distroless/base-debian10
 LABEL maintainer="lotus Docker Maintainers https://fuckcloudnative.io"
 
-WORKDIR /
+ENV FIL_PROOFS_PARAMETER_CACHE=/proofs
+ENV LOTUS_PATH=/lotus/lotus-daemon
+ENV RUST_LOG=Info
 
 # Certs
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
@@ -69,9 +69,8 @@ COPY --from=builder /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /lib/libstdc++.so.6
 # PID1 tini
 COPY --from=builder /go/tini /usr/local/bin/tini
 
-# Lotus bin && entrypoint script
+# Lotus bin 
 COPY --from=builder /go/$REPO_DIR/lotus/lotus /usr/local/bin/lotus
-COPY --from=builder /go/daemon-entrypoint.sh /usr/local/bin/daemon-entrypoint.sh
 
 # Lotus sync port
 EXPOSE 2333
@@ -80,7 +79,7 @@ EXPOSE 2333
 # VOLUME /lotus
 # VOLUME /proofs
 
-ENTRYPOINT ["tini", "--", "daemon-entrypoint.sh"]
+ENTRYPOINT ["tini", "--"]
 
 # Run lotus daemon
 CMD ["lotus", "daemon"]

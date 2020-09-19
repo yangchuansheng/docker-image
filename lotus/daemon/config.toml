@@ -1,0 +1,27 @@
+# Default config:
+[API]
+ListenAddress = "/ip4/0.0.0.0/tcp/2333/http"
+#  RemoteListenAddress = ""
+#  Timeout = "30s"
+#
+[Libp2p]
+#  ListenAddresses = ["/ip4/0.0.0.0/tcp/0", "/ip6/::/tcp/0"]
+#  AnnounceAddresses = []
+#  NoAnnounceAddresses = []
+#  ConnMgrLow = 150
+#  ConnMgrHigh = 180
+#  ConnMgrGrace = "20s"
+#
+[Pubsub]
+#  Bootstrapper = false
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
+#
+[Client]
+#  UseIpfs = false
+#  IpfsMAddr = ""
+#  IpfsUseForRetrieval = false
+#
+[Metrics]
+#  Nickname = ""
+#  HeadNotifs = false
+##
