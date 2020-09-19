@@ -11,5 +11,5 @@ RUN wget -O /tmp/octant.tar.gz "https://github.com/vmware-tanzu/octant/releases/
 # octant listen port
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/local/bin/octant", "--kubeconfig", "/root/.kube/config" ]
+ENTRYPOINT [ "/bin/sh", "-c", "/usr/local/bin/octant", "--kubeconfig", "/root/.kube/config" ]
 CMD [ "--listener-addr", "0.0.0.0:80" "--disable-open-browser" ]
