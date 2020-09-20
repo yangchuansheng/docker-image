@@ -73,7 +73,7 @@ COPY --from=builder /go/tini /usr/local/bin/tini
 
 # Lotus bin 
 COPY --from=builder /go/$REPO_DIR/lotus/lotus /usr/local/bin/lotus
-COPY lotus/daemon/config.toml $LOTUS_PATH/config.toml
+COPY config.toml $LOTUS_PATH/config.toml
 
 # Lotus sync port
 EXPOSE 2333
