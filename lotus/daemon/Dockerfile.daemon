@@ -51,9 +51,11 @@ RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
 FROM debian:buster-slim
 LABEL maintainer="lotus Docker Maintainers https://fuckcloudnative.io"
 
-ENV FIL_PROOFS_PARAMETER_CACHE=/proofs
-ENV LOTUS_PATH=/lotus/lotus-daemon
-ENV RUST_LOG=Info
+ENV FIL_PROOFS_PARAMETER_CACHE=/proofs \
+    LOTUS_PATH=/lotus/lotus-daemon \
+    RUST_LOG=Info
+
+RUN mkdir -p $LOTUS_PATH
 
 # Certs
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
