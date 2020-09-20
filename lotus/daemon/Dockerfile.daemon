@@ -48,7 +48,7 @@ RUN git clone --depth=1 -b $BRANCH $LOTUS_REP $REPO_DIR; \
 RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
     chmod +x tini; 
 
-FROM gcr.io/distroless/base-debian10
+FROM debian:buster-slim
 LABEL maintainer="lotus Docker Maintainers https://fuckcloudnative.io"
 
 ENV FIL_PROOFS_PARAMETER_CACHE=/proofs
@@ -71,6 +71,7 @@ COPY --from=builder /go/tini /usr/local/bin/tini
 
 # Lotus bin 
 COPY --from=builder /go/$REPO_DIR/lotus/lotus /usr/local/bin/lotus
+COPY config.toml $LOTUS_PATH/config.toml
 
 # Lotus sync port
 EXPOSE 2333
