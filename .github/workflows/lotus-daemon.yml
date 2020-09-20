@@ -50,7 +50,7 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
         tags: latest
-        dockerfile: '{path}/Dockerfile.daemon'
+        dockerfile: 'lotus/daemon/Dockerfile.daemon'
         path: lotus/daemon
         
     - name: Push Docker images to docker.io
