@@ -14,11 +14,11 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'lotus/Dockerfile.daemon'
+      - 'lotus/daemon/Dockerfile.daemon'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'lotus/Dockerfile.daemon'
+      - 'lotus/daemon/Dockerfile.daemon'
   watch:
     types: started
 
@@ -49,7 +49,7 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
         tags: latest
-        dockerfile: 'lotus/Dockerfile.daemon'
+        dockerfile: 'lotus/daemon/Dockerfile.daemon'
         path: lotus
         
     - name: Push Docker images to docker.io
