@@ -1,4 +1,4 @@
-FROM php:7.3-fpm 
+FROM php:rc-fpm
 
 LABEL maintainer="disqus-php-api Docker Maintainers https://fuckcloudnative.io"
 
