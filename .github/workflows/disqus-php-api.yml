@@ -54,7 +54,7 @@ jobs:
       run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin  
 
     # Runs a single command using the runners shell
-    - name: Build and push Docker images to docker.io
+    - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
         file: 'disqus-php-api/Dockerfile'
