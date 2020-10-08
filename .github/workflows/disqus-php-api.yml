@@ -14,12 +14,12 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'disqus-php-api/Dockerfile'
-      - '.github/workflows/disqus-php-api.yml'
+      - 'disqus-php-api/php/Dockerfile'
+      - '.github/workflows/disqus-php.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'disqus-php-api/Dockerfile'
+      - 'disqus-php-api/php/Dockerfile'
   watch:
     types: started
 
@@ -57,13 +57,13 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'disqus-php-api/Dockerfile'
+        file: 'disqus-php-api/php/Dockerfile'
         platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
-        context: disqus-php-api
+        context: disqus-php-api/php
         push: true
         tags: |
-          yangchuansheng/disqus-php-api:latest
-          ghcr.io/yangchuansheng/disqus-php-api:latest
+          yangchuansheng/disqus-php:latest
+          ghcr.io/yangchuansheng/disqus-php:latest
 
     - name: Update repo description
       uses: peter-evans/dockerhub-description@v2
