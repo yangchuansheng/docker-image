@@ -1,12 +1,12 @@
 #=================================================
 # https://github.com/yangchuansheng/docker-image
-# Description: Build and push disqus-php-api Docker image
+# Description: Build and push disqus-php Docker image
 # Lisence: MIT
 # Author: Ryan
 # Blog: https://fuckcloudnative.io
 #=================================================
 
-name: Build and push disqus-php-api Docker image
+name: Build and push disqus-php Docker image
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
