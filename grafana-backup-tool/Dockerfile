@@ -2,7 +2,6 @@ FROM alpine:latest
 
 LABEL maintainer="grafana-backup-tool Docker Maintainers https://fuckcloudnative.io"
 
-ENV RESTORE false
 ENV ARCHIVE_FILE ""
 
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
@@ -15,4 +14,3 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk
 WORKDIR /opt/grafana-backup-tool
 
 USER 1337
-CMD sh -c 'if [ "$RESTORE" = true ]; then if [ ! -z "$AWS_S3_BUCKET_NAME" ]; then grafana-backup restore $ARCHIVE_FILE; else grafana-backup restore _OUTPUT_/$ARCHIVE_FILE; fi else grafana-backup save; fi'
