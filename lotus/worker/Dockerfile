@@ -8,6 +8,10 @@ ENV lotus_dir=/tank1/star \
     WORKER_PATH=$lotus_dir/worker \
     MINER_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.Z4eliDpzUWD_8rnPceGBnKYQbZawnebHjpfvYLQe1t8:/ip4/172.16.18.1/tcp/2345/http
 
+RUN apt update; \
+    apt install --no-install-recommends --no-install-suggests -y ocl-icd-opencl-dev; \
+    rm -rf /var/lib/apt/lists/*
+
 COPY tini /usr/local/bin/tini
 COPY lotus-worker /usr/local/bin/lotus-worker
 
