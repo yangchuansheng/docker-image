@@ -14,4 +14,4 @@ COPY lotus-worker /usr/local/bin/lotus-worker
 ENTRYPOINT ["tini", "--"]
 
 # Run lotus worker
-CMD ["lotus", "run", "--listen", "0.0.0.0:24000"]
+CMD ["lotus-worker", "run", "--listen", "0.0.0.0:24000"]
