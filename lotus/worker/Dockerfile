@@ -22,12 +22,9 @@ ENV lotus_dir=/tank1/star \
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
 
 # Required libs
-COPY --from=builder /usr/lib/x86_64-linux-gnu/libdl.so /lib/libdl.so.2
-COPY --from=builder /usr/lib/x86_64-linux-gnu/libutil.so /lib/libutil.so.1 
-COPY --from=builder /usr/lib/x86_64-linux-gnu/librt.so /lib/librt.so.1
-COPY --from=builder /usr/lib/gcc/x86_64-linux-gnu/8/libgcc_s.so.1 /lib/libgcc_s.so.1
-COPY --from=builder /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /lib/libOpenCL.so.1
-COPY --from=builder /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /lib/libstdc++.so.6
+RUN apt update; \
+    apt install -y mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang; \
+    rm -rf /var/lib/apt/lists/*
 
 # PID1 tini
 COPY --from=builder /go/tini /usr/local/bin/tini
