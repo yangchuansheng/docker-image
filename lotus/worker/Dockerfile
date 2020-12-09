@@ -23,7 +23,7 @@ COPY --from=builder /etc/ssl/certs /etc/ssl/certs
 
 # Required libs
 RUN apt update; \
-    apt install -y mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang; \
+    apt install -y mesa-opencl-icd ocl-icd-opencl-dev; \
     rm -rf /var/lib/apt/lists/*
 
 # PID1 tini
