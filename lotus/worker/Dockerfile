@@ -8,7 +8,7 @@ RUN apt update; \
 RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
     chmod +x tini; 
 
-FROM debian:buster-slim 
+FROM nvidia/opengl:1.0-glvnd-devel-ubuntu18.04
 LABEL maintainer="lotus-worker Docker Maintainers https://fuckcloudnative.io"
 
 ENV lotus_dir=/tank1/star \
@@ -23,8 +23,13 @@ COPY --from=builder /etc/ssl/certs /etc/ssl/certs
 
 # Required libs
 RUN apt update; \
-    apt install -y mesa-opencl-icd ocl-icd-opencl-dev; \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends mesa-opencl-icd ocl-icd-opencl-dev ocl-icd-libopencl1; \
+    rm -rf /var/lib/apt/lists/*; \
+    mkdir -p /etc/OpenCL/vendors; \
+    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
+    
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,display
 
 # PID1 tini
 COPY --from=builder /go/tini /usr/local/bin/tini
