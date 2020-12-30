@@ -15,6 +15,7 @@ on:
     branches: [ master ]
     paths: 
       - 'lotus/worker/Dockerfile'
+      - 'lotus/worker/lotus-worker'
       - '.github/workflows/lotus-worker.yml'
   pull_request:
     branches: [ master ]
