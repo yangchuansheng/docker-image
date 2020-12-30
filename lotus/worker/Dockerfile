@@ -11,12 +11,11 @@ RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
 FROM nvidia/opengl:1.0-glvnd-devel-ubuntu18.04
 LABEL maintainer="lotus-worker Docker Maintainers https://fuckcloudnative.io"
 
-ENV lotus_dir=/tank1/star \
-    proofs_dir=/root/star/filecoin-proof-parameters \
-    FIL_PROOFS_PARAMETER_CACHE=/root/star/filecoin-proof-parameters \   
-    RUST_LOG=Trace \
-    WORKER_PATH=/tank1/star/worker \
-    MINER_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.Z4eliDpzUWD_8rnPceGBnKYQbZawnebHjpfvYLQe1t8:/ip4/172.16.18.1/tcp/2345/http
+ENV TMPDIR=/tank1/filestar-tmp \
+    FIL_PROOFS_PARENT_CACHE=/tank1/filestar-tmp/parent \
+    FIL_PROOFS_PARAMETER_CACHE=/tank1/filestar-tmp/parameter \   
+    RUST_LOG=info \
+    WORKER_PATH=/tank1/star/worker
 
 # Certs
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
