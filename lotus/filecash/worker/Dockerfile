@@ -43,4 +43,4 @@ COPY lotus-worker /usr/local/bin/lotus-worker
 ENTRYPOINT ["tini", "--"]
 
 # Run lotus worker
-CMD ["lotus-worker", "run", "--listen", "0.0.0.0:10086", "--precommit1max", "30", "--precommit2max", "30", "--commitmax", "6"]
+CMD ["lotus-worker", "run", "--listen", "0.0.0.0:10086", "--no-local-storage=true", "--no-swap=true", "-addpiece=false", "--precommit1=false", "--unseal=false", "--precommit2=false", "--commit=true", "--group=all"]
