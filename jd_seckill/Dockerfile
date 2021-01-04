@@ -26,7 +26,7 @@ RUN set -ex; \
       git clone -b $GIT_BRANCH https://github.com/huanghyw/jd_seckill.git /app; \
       cd /app \
         && rm -rf .git; \
-      pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/; \
+      pip install -r requirements.txt; \
       \
       # init Chromium Browser
       python -c "import asyncio;\
