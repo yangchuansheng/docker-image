@@ -14,7 +14,7 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'jd_seckill/Dockerfile'
+      - 'jd_seckill/*'
       - '.github/workflows/jd_seckill.yml'
   pull_request:
     branches: [ master ]
