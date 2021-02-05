@@ -7,6 +7,9 @@ RUN apt update; \
 
 RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
     chmod +x tini; 
+    
+RUN curl -sOL https://github.com/filecash/lotus/releases/download/filecash-v0.9.0-fix4/amd-filecash-v0.9.0-fix4.tar.gz; \
+    tar zxf amd-filecash-v0.9.0-fix4.tar.gz;
 
 FROM nvidia/opengl:1.0-glvnd-devel-ubuntu18.04
 LABEL maintainer="lotus-worker Docker Maintainers https://fuckcloudnative.io"
@@ -38,7 +41,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,display
 # PID1 tini
 COPY --from=builder /go/tini /usr/local/bin/tini
 
-COPY lotus-worker /usr/local/bin/lotus-worker
+COPY --from=builder /go/amd-filecash-v0.9.0-fix4/lotus-worker /usr/local/bin/lotus-worker
+#COPY lotus-worker /usr/local/bin/lotus-worker
 
 ENTRYPOINT ["tini", "--"]
 
