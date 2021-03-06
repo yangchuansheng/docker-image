@@ -1,12 +1,12 @@
 #=================================================
 # https://github.com/yangchuansheng/docker-image
-# Description: Build and push hugo-webhook Docker image
+# Description: Build and push hugo-update Docker image
 # Lisence: MIT
 # Author: Ryan
 # Blog: https://fuckcloudnative.io
 #=================================================
 
-name: Build and push hugo-webhook Docker image
+name: Build and push hugo-update Docker image
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -14,14 +14,13 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'hugo-webhook/Dockerfile'
-      - 'hugo-webhook/start.sh'
-      - 'hugo-webhook/webhook.js'
-      - '.github/workflows/hugo-webhook.yml'
+      - 'hugo-webhook/Dockerfile.hugo-update'
+      - 'hugo-webhook/deploy.sh'
+      - '.github/workflows/hugo-update.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'hugo-webhook/Dockerfile'
+      - 'hugo-update/Dockerfile.hugo-update'
   #watch:
     #types: started
 
@@ -59,18 +58,19 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'hugo-webhook/Dockerfile'
+        file: 'hugo-update/Dockerfile'
         platforms: linux/amd64
         context: hugo-webhook
+        file: {context}/Dockerfile.hugo-update
         push: true
         tags: |
-          yangchuansheng/hugo-webhook:latest
-          ghcr.io/yangchuansheng/hugo-webhook:latest
+          yangchuansheng/hugo-update:latest
+          ghcr.io/yangchuansheng/hugo-update:latest
 
     #- name: Update repo description
       #uses: peter-evans/dockerhub-description@v2
       #env:
         #DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         #DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        #DOCKERHUB_REPOSITORY: yangchuansheng/hugo-webhook
-        #README_FILEPATH: hugo-webhook/readme.md
+        #DOCKERHUB_REPOSITORY: yangchuansheng/hugo-update
+        #README_FILEPATH: hugo-update/readme.md

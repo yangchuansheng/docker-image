@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hugo-update
+spec:
+  completions: 2
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        app: hugo-update
+    spec:
+      nodeSelector:
+        ingress: "true"
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - hugo-update
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+      containers:
+      - name: hugo-update
+        image: perl
+        env:
+        - name: GITHUB_USERNAME
+          value: "yangchuansheng"
+        - name: GITHUB_PASSWD
+          value: "4L%5eEi%405iZZY%23YfV4478%26"
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+        - mountPath: /opt/hugo
+          name: hugo
+        - mountPath: /opt/envoy-handbook
+          name: envoy-handbook
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: hugo
+        hostPath:
+          path: /opt/hugo
+      - name: envoy-handbook
+        hostPath:
+          path: /opt/envoy-handbook
+      restartPolicy: Never
+  backoffLimit: 4
