@@ -14,7 +14,8 @@ FROM node:current-alpine
 LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 
 RUN apk update; \
-    apk --no-cache add git
+    apk --no-cache add git; \
+    npm i -g github-webhook-handler
 
 WORKDIR /app
 
@@ -26,4 +27,4 @@ COPY webhook.js /app
 EXPOSE 80
 
 ENTRYPOINT ["tini", "--"]
-CMD ["node", "webhook.js"]
+CMD ["/usr/local/bin/node", "webhook.js"]
