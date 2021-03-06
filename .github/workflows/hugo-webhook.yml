@@ -17,6 +17,7 @@ on:
       - 'hugo-webhook/Dockerfile'
       - 'hugo-webhook/start.sh'
       - 'hugo-webhook/webhook.js'
+      - 'hugo-webhook/hugo-update.yaml'
       - '.github/workflows/hugo-webhook.yml'
   pull_request:
     branches: [ master ]
