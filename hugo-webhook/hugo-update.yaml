@@ -27,7 +27,7 @@ spec:
       containers:
       - name: hugo-update
         image: ghcr.io/yangchuansheng/hugo-update:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: GITHUB_USERNAME
           value: $GITHUB_USERNAME
