@@ -13,6 +13,9 @@ RUN apk update; \
 FROM node:current-alpine
 LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 
+RUN apk update; \
+    apk --no-cache add git
+
 WORKDIR /app
 
 COPY --from=builder /tmp/hugo /usr/local/bin/hugo
