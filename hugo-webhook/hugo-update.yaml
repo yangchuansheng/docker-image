@@ -26,12 +26,13 @@ spec:
             weight: 1
       containers:
       - name: hugo-update
-        image: perl
+        image: ghcr.io/yangchuansheng/hugo-update:latest
+        imagePullPolicy: IfNotPresent
         env:
         - name: GITHUB_USERNAME
-          value: "yangchuansheng"
+          value: $GITHUB_USERNAME
         - name: GITHUB_PASSWD
-          value: "4L%5eEi%405iZZY%23YfV4478%26"
+          value: $GITHUB_PASSWD
         volumeMounts:
         - mountPath: /etc/localtime
           name: localtime
