@@ -4,7 +4,9 @@ LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 # config
 ENV HUGO_VERSION=0.75.1
 
-RUN wget -O - https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz | tar -xz -C /tmp; \
+RUN apk update; \
+    apk --no-cache add curl; \
+    wget -O - https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz | tar -xz -C /tmp; \
     curl -sL https://github.com/krallin/tini/releases/download/v0.19.0/tini -o /tmp/tini; \
     chmod +x /tmp/tini;
 
