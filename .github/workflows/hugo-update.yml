@@ -58,7 +58,7 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: '{context}/Dockerfile.hugo-update'
+        file: 'hugo-webhook/Dockerfile.hugo-update'
         platforms: linux/amd64
         context: hugo-webhook
         push: true
