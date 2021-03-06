@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 git config --global credential.helper store
-echo $GITHUB_USERNAME:$GITHUB_PASSWD@github.com > /root/.git-credentials
+echo https://$GITHUB_USERNAME:$GITHUB_PASSWD@github.com > /root/.git-credentials
 
 cd /opt/hugo
 git pull origin master
