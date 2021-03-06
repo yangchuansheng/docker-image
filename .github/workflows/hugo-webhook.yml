@@ -15,7 +15,7 @@ on:
     branches: [ master ]
     paths: 
       - 'hugo-webhook/Dockerfile'
-      - 'hugo-webhook'
+      - 'hugo-webhook/deploy.sh'
       - '.github/workflows/hugo-webhook.yml'
   pull_request:
     branches: [ master ]
