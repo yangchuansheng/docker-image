@@ -13,11 +13,12 @@ RUN apk update; \
 FROM node:current-alpine
 LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 
+WORKDIR /app
+
 RUN apk update; \
     apk --no-cache add git bash; \
-    npm i -g github-webhook-handler
-
-WORKDIR /app
+    cd /app; \
+    npm i -S github-webhook-handler
 
 COPY --from=builder /tmp/hugo /usr/local/bin/hugo
 COPY --from=builder /tmp/tini /usr/local/bin/tini
