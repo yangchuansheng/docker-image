@@ -29,4 +29,4 @@ COPY hugo-update.yaml /app
 EXPOSE 80
 
 ENTRYPOINT ["tini", "--"]
-CMD ["node", "webhook.js"]
+CMD ["./hugo-webhook"]
