@@ -1,4 +1,4 @@
-FROM golang AS builder
+FROM golang:alpine AS builder
 LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 
 # config
@@ -14,7 +14,7 @@ RUN go get; \
 
 RUN wget -O - https://dl.k8s.io/v${KUBECTL_VERSION}/kubernetes-client-linux-amd64.tar.gz | tar -xz -C /tmp
 
-FROM node:current-alpine
+FROM alpine
 LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 
 WORKDIR /app
