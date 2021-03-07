@@ -16,7 +16,7 @@ on:
     paths: 
       - 'hugo-webhook/Dockerfile'
       - 'hugo-webhook/start.sh'
-      - 'hugo-webhook/webhook.js'
+      - 'hugo-webhook/main.go'
       - 'hugo-webhook/hugo-update.yaml'
       - '.github/workflows/hugo-webhook.yml'
   pull_request:
