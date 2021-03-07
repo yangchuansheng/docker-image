@@ -9,7 +9,8 @@ WORKDIR /src
 # build webhook
 COPY main.go .
 COPY go.mod .
-RUN go build -o hugo-webhook main.go
+RUN go get; \
+    go build -o hugo-webhook main.go
 
 RUN wget -O - https://dl.k8s.io/v${KUBECTL_VERSION}/kubernetes-client-linux-amd64.tar.gz | tar -xz -C /tmp
 
