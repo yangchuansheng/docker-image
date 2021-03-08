@@ -71,20 +71,10 @@ spec:
         volumeMounts:
         - mountPath: /etc/localtime
           name: localtime
-        - mountPath: /opt/hugo 
-          name: hugo
-        - mountPath: /opt/envoy-handbook
-          name: envoy-handbook
       volumes:
       - name: localtime
         hostPath:
           path: /etc/localtime
-      - name: hugo
-        hostPath:
-          path: /opt/hugo
-      - name: envoy-handbook
-        hostPath:
-          path: /opt/envoy-handbook
 ---
 apiVersion: v1
 kind: Service
