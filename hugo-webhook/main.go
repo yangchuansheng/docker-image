@@ -30,7 +30,7 @@ func main() {
 		case github.PushPayload:
 			cmd := exec.Command("sh", "-c", "./start.sh")
 			if output, err := cmd.CombinedOutput(); err != nil {
-				log.Fatal(err)
+				fmt.Printf("got err, %+v\n", err)
 			} else {
 				fmt.Println(string(output))
 			}
