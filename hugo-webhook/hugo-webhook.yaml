@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hugo-webhook
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: kube-system
+  name: hugo-webhook
+rules:
+- apiGroups: ["batch"] # "" 标明 core API 组
+  resources: ["jobs"]
+  verbs: ["get", "watch", "list", "delete", "create", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# 此角色绑定允许 "jane" 读取 "default" 名字空间中的 Pods
+kind: RoleBinding
+metadata:
+  name: hugo-webhook
+  namespace: kube-system
+subjects:
+# 你可以指定不止一个“subject（主体）”
+subjects:
+- kind: ServiceAccount
+  name: hugo-webhook
+  namespace: kube-system
+roleRef:
+  # "roleRef" 指定与某 Role 或 ClusterRole 的绑定关系
+  kind: Role # 此字段必须是 Role 或 ClusterRole
+  name: hugo-webhook     # 此字段必须与你要绑定的 Role 或 ClusterRole 的名称匹配
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hugo-webhook 
+  namespace: kube-system
+  labels:
+    app: hugo-webhook
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hugo-webhook
+  template:
+    metadata:
+      labels:
+        app: hugo-webhook
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/ingress
+        operator: Exists
+        effect: NoSchedule
+      serviceAccountName: hugo-webhook
+      containers:
+      - name: hugo-webhook
+        image: ghcr.io/yangchuansheng/hugo-webhook:latest 
+        imagePullPolicy: Always 
+        env:
+        - name: WEBHOOK_SECRET
+          value: "yang8683060"
+        - name: GITHUB_USERNAME
+          value: "*****"
+        - name: GITHUB_PASSWD
+          value: "*****"
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+        - mountPath: /opt/hugo 
+          name: hugo
+        - mountPath: /opt/envoy-handbook
+          name: envoy-handbook
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: hugo
+        hostPath:
+          path: /opt/hugo
+      - name: envoy-handbook
+        hostPath:
+          path: /opt/envoy-handbook
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hugo-webhook
+  namespace: kube-system
+  labels:
+    app: hugo-webhook
+spec:
+  selector:
+    app: hugo-webhook
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80 
+      targetPort: 80
