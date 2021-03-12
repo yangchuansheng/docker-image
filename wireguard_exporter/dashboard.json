@@ -71,7 +71,7 @@
   "panels": [
     {
       "cacheTimeout": null,
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -140,7 +140,7 @@
       "type": "gauge"
     },
     {
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -255,7 +255,7 @@
       "type": "table"
     },
     {
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -324,7 +324,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -442,7 +442,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "description": "1分钟内平均每秒发送给 peer 的流量",
       "fieldConfig": {
         "defaults": {
@@ -550,7 +550,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "description": "1分钟内平均每秒接收的 peer 流量",
       "fieldConfig": {
         "defaults": {
@@ -655,7 +655,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "description": "1分钟内平均每秒发送给 peer 的流量",
       "fieldConfig": {
         "defaults": {
@@ -762,7 +762,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "${DS__VICTORIAMETRICS}",
       "description": "1分钟内平均每秒接收的 peer 流量",
       "fieldConfig": {
         "defaults": {
@@ -870,7 +870,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "prometheus",
+        "datasource": "${DS__VICTORIAMETRICS}",
         "definition": "label_values(wireguard_device_info, device)",
         "error": null,
         "hide": 0,
