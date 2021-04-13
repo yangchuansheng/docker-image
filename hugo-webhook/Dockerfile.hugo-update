@@ -2,7 +2,7 @@ FROM alpine AS builder
 LABEL maintainer="hugo-webhook Maintainers https://fuckcloudnative.io"
 
 # config
-ENV HUGO_VERSION=0.75.1
+ENV HUGO_VERSION=0.82.0
 
 WORKDIR /app
 
