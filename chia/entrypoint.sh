@@ -49,4 +49,4 @@ for ((i = $NFS_INDEX_FIRST; i <= $NFS_INDEX_LAST; i++)); do
 done
 
 cd /chia-blockchain
-./chia-plotter -action plotting -plotting-fpk $FARMER_PK -plotting-ppk $POOL_PK -plotting-n 1 -d /nfs9901/test1 -t /tank1/test1 -2 /tank1/test1
+./chia-plotter -action plotting -plotting-fpk $FARMER_PK -plotting-ppk $POOL_PK -plotting-n 1 -d /nfs9901/test1 -t $CACHE_PATH -2 $CACHE_PATH
