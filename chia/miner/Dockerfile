@@ -17,6 +17,10 @@ LABEL maintainer="chia-miner Maintainers https://fuckcloudnative.io"
 
 WORKDIR /chia
 
+RUN apt update; \
+    apt install -y ca-certificates; \
+    rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /go/linux/hpool-miner-chia /chia/
 COPY --from=builder /go/tini /usr/local/bin/tini
 
