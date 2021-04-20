@@ -1,0 +1,18 @@
+token: ""
+path:
+- /nfs9901/test1/
+minerName: 
+apiKey: 
+cachePath: ""
+deviceId: ""
+extraParams: {}
+log:
+  lv: info
+  path: ./log
+  name: miner.log
+url:
+  info: ""
+  submit: ""
+scanPath: false
+scanMinute: 0
+debug: ""
