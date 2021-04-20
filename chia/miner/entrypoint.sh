@@ -1,6 +1,6 @@
 #! /bin/bash
 
-sed -e -i "s/^apiKey/apiKey: $(APIKEY)/g" config.yaml
-sed -e -i "s/^minerName/minerName: $HOSTNAME/g" config.yaml
+sed -i "/apiKey/c apiKey: $(APIKEY)" config.yaml
+sed -i "/minerName/c minerName: $HOSTNAME" config.yaml
 
 ./hpool-miner-chia
