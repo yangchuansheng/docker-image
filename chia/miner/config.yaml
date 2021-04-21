@@ -13,6 +13,6 @@ log:
 url:
   info: ""
   submit: ""
-scanPath: false
-scanMinute: 0
+scanPath: true
+scanMinute: 10
 debug: ""
