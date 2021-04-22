@@ -12,7 +12,7 @@ RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
 RUN wget -O vscode-web.tar.gz https://update.code.visualstudio.com/latest/server-linux-x64-web/stable; \
     tar xzvf vscode-web.tar.gz
 
-FROM node:lts-alpine
+FROM node:buster-slim
 LABEL maintainer="vscode Maintainers https://fuckcloudnative.io"
 
 COPY --from=builder /vscode/tini /usr/local/bin/tini
