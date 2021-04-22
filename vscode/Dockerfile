@@ -4,7 +4,7 @@ LABEL maintainer="vscode Maintainers https://fuckcloudnative.io"
 WORKDIR /vscode
 
 RUN apk update; \
-    apk add wget
+    apk add curl wget
 
 RUN curl -sOL https://github.com/krallin/tini/releases/download/v0.19.0/tini; \
     chmod +x tini
