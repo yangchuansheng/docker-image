@@ -14,12 +14,12 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'ehforwarderbot/*'
+      - 'ehForwarderBot/*'
       - '.github/workflows/ehforwarderbot.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'ehforwarderbot/*'
+      - 'ehForwarderBot/*'
   #watch:
     #types: started
 
@@ -57,9 +57,9 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'ehforwarderbot/Dockerfile'
+        file: 'ehForwarderBot/Dockerfile'
         platforms: linux/amd64
-        context: ehforwarderbot
+        context: ehForwarderBot
         push: true
         tags: |
           yangchuansheng/ehforwarderbot:latest
