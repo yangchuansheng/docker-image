@@ -7,6 +7,7 @@ ENV TZ Asia/Shanghai
 RUN set -ex \
    && apk --no-cache add \
       python3-dev \
+      py3-pillow \
       py3-ruamel.yaml \
       libmagic \
       ffmpeg \
@@ -18,7 +19,8 @@ RUN set -ex \
       libffi-dev \
       openssl-dev \
       libwebp-dev \
-   && pip3 install ehforwarderbot efb-telegram-master efb-wechat-slave python-telegram-bot Pillow \
+   && pip3 install ehforwarderbot efb-telegram-master efb-wechat-slave python-telegram-bot \
+   && pip3 install --no-deps --force-reinstall Pillow \
    && mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram /root/.ehforwarderbot/modules/
 
 COPY config.yaml /root/.ehforwarderbot/profiles/default/
