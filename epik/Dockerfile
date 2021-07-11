@@ -5,7 +5,7 @@ LABEL maintainer="epik Maintainers https://fuckcloudnative.io"
 WORKDIR /go
 
 RUN apt update; \
-	DEBIAN_FRONTEND=noninteractive apt install -y git mesa-opencl-icd ocl-icd-opencl-dev build-essential hwloc libhwloc-dev net-tools openssh-server; \
+	DEBIAN_FRONTEND=noninteractive apt install -y mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget; \
 	apt clean
 
 RUN git clone https://github.com/EpiK-Protocol/go-epik.git; \
@@ -17,6 +17,10 @@ RUN git clone https://github.com/EpiK-Protocol/go-epik.git; \
 FROM ubuntu:20.04
 
 LABEL maintainer="epik Maintainers https://fuckcloudnative.io"
+
+RUN apt update; \
+	DEBIAN_FRONTEND=noninteractive apt install -y mesa-opencl-icd ocl-icd-opencl-dev build-essential hwloc libhwloc-dev net-tools openssh-server; \
+	apt clean
 
 ENV EPIK_PATH=/data/node
 ENV EPIK_COLD_PATH=/cold_data
