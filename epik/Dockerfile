@@ -3,8 +3,8 @@ FROM ubuntu:20.04
 MAINTAINER christismith
 
 RUN apt update; \
-	&& DEBIAN_FRONTEND=noninteractive apt install -y git mesa-opencl-icd ocl-icd-opencl-dev build-essential hwloc libhwloc-dev net-tools openssh-server; \
-	&& apt clean
+	DEBIAN_FRONTEND=noninteractive apt install -y git mesa-opencl-icd ocl-icd-opencl-dev build-essential hwloc libhwloc-dev net-tools openssh-server; \
+	apt clean
 
 ENV EPIK_PATH=/data/node
 ENV EPIK_COLD_PATH=/cold_data
