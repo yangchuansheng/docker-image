@@ -1,10 +1,22 @@
-FROM ubuntu:20.04
+FROM golang AS builder
 
-MAINTAINER christismith
+LABEL maintainer="epik Maintainers https://fuckcloudnative.io"
+
+WORKDIR /go
 
 RUN apt update; \
 	DEBIAN_FRONTEND=noninteractive apt install -y git mesa-opencl-icd ocl-icd-opencl-dev build-essential hwloc libhwloc-dev net-tools openssh-server; \
 	apt clean
+
+RUN git clone https://github.com/EpiK-Protocol/go-epik.git; \
+    cd go-epik; \
+    git submodule update --init; \
+    make all; \
+    make install
+
+FROM ubuntu:20.04
+
+LABEL maintainer="epik Maintainers https://fuckcloudnative.io"
 
 ENV EPIK_PATH=/data/node
 ENV EPIK_COLD_PATH=/cold_data
@@ -17,11 +29,9 @@ ENV IPFS_GATEWAY=http://www.itemtry.com:8081/ipfs/
 
 WORKDIR /data
 
-RUN git clone https://github.com/EpiK-Protocol/go-epik.git; \
-    cd go-epik; \
-    git submodule update --init; \
-    make all; \
-    make install
+COPY --from=builder /usr/local/bin/epik /usr/local/bin/epik
+COPY --from=builder /usr/local/bin/epik-miner /usr/local/bin/epik-miner
+COPY --from=builder /usr/local/bin/epik-worker /usr/local/bin/epik-worker
 
 COPY init-node.sh /usr/local/bin/
 COPY run-miner.sh /usr/local/bin/
