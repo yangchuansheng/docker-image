@@ -1,3 +1,5 @@
+FROM ubuntu:20.04
+
 MAINTAINER christismith
 
 RUN apt update; \
