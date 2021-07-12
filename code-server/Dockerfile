@@ -24,8 +24,8 @@ RUN \
     > /etc/apt/sources.list.d/yarn.list && \
   echo "**** install my tools ****" && \
   apt-get install -y gcc && \
-  curl -o hugo.deb -s https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_$HUGO_VERSION_Linux-64bit.deb && \
-  dpkg -i hugo.deb && \
+  curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb && \
+  dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb && \
   echo "**** install build dependencies ****" && \
   apt-get update && \
   apt-get install -y \
