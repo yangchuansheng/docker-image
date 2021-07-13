@@ -14,7 +14,7 @@ RUN git clone https://github.com/EpiK-Protocol/go-epik.git; \
     make all; \
     make install
 
-FROM ubuntu:20.04
+FROM debian:10
 
 LABEL maintainer="epik Maintainers https://fuckcloudnative.io"
 
