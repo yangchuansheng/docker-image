@@ -23,7 +23,7 @@ RUN \
   echo 'deb https://dl.yarnpkg.com/debian/ stable main' \
     > /etc/apt/sources.list.d/yarn.list && \
   echo "**** install my tools ****" && \
-  apt-get install -y gcc && \
+  apt-get install -y gcc gdb && \
   curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb && \
   dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb && \
   echo "**** install build dependencies ****" && \
