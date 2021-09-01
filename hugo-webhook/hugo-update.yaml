@@ -14,16 +14,14 @@ spec:
         ingress: "true"
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - hugo-update
-              topologyKey: kubernetes.io/hostname
-            weight: 1
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - hugo-update 
       containers:
       - name: hugo-update
         image: ghcr.io/yangchuansheng/hugo-update:latest
