@@ -25,7 +25,7 @@ RUN \
   echo "**** install my tools ****" && \
   apt-get install -y gcc gdb && \
   curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb && \
-  dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb && \
+  dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb && \
   echo "**** install build dependencies ****" && \
   apt-get update && \
   apt-get install -y \
