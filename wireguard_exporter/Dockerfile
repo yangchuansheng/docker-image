@@ -1,7 +1,7 @@
 FROM rust as builder
 
 LABEL description="Docker container for building prometheus exporter for wireguard."
-LABEL maintainer="Ryan Yang <yangchuansheng33@gmail.com>"
+LABEL maintainer="Carson Yang <yangchuansheng33@gmail.com>"
 
 WORKDIR /usr/src/
 RUN git clone https://github.com/kbknapp/wireguard_exporter; \
