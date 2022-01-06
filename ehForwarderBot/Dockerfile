@@ -19,7 +19,8 @@ RUN set -ex \
       libffi-dev \
       openssl-dev \
       libwebp-dev \
-   && pip3 install ehforwarderbot efb-telegram-master efb-wechat-slave python-telegram-bot \
+   && pip3 install ehforwarderbot efb-telegram-master python-telegram-bot \
+   && pip3 install git+https://github.com/ehForwarderBot/efb-wechat-slave \
    && pip3 install --no-deps --force-reinstall Pillow \
    && sed -i "s/webwxnewloginpage?mod=desktop/webwxnewloginpage/g" /usr/local/lib/python3.10/site-packages/efb_wechat_slave/vendor/itchat/components/login.py \
    && mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram /root/.ehforwarderbot/modules/
