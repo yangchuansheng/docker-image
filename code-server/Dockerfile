@@ -10,9 +10,9 @@ LABEL maintainer="aptalca"
 # environment settings
 ENV HOME="/config"
 ENV HUGO_VERSION="0.85.0"
-ENV RUSTUP_HOME=/usr/local/rustup \
-    CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH \
+ENV RUSTUP_HOME=/config/rustup \
+    CARGO_HOME=/config/cargo \
+    PATH=/config/cargo/bin:$PATH \
     RUST_VERSION=1.58.0
 
 RUN \
