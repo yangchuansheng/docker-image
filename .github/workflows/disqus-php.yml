@@ -14,12 +14,12 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'disqus-php-api/php/*'
+      - 'disqus-php-api/php'
       - '.github/workflows/disqus-php.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'disqus-php-api/php/*'
+      - 'disqus-php-api/php'
   watch:
     types: started
 
