@@ -58,7 +58,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         file: 'ip_derper/Dockerfile'
-        platforms: linux/386,linux/amd64
+        platforms: linux/amd64
         context: ip_derper
         push: true
         tags: |
