@@ -1,5 +1,6 @@
 FROM php:7.4.11-fpm
 
+LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
 LABEL maintainer="disqus-php-api Docker Maintainers https://fuckcloudnative.io"
 
 RUN set -x; \
