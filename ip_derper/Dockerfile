@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # ========= CONFIG =========
 # - download links
 ENV GOLANG_URL=https://go.dev/dl/go1.17.7.linux-amd64.tar.gz
-ENV MODIFIED_DERPER_GIT=https://github.com/veritas501/tailscale.git
+ENV MODIFIED_DERPER_GIT=https://github.com/yangchuansheng/tailscale.git
 # ==========================
 
 # apt
