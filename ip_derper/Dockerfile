@@ -26,10 +26,13 @@ ENV DERP_VERIFY_CLIENTS false
 
 # apt
 RUN apt-get update && \
-    apt-get install -y openssl
+    apt-get install -y openssl curl
 
 COPY build_cert.sh /app/
 COPY --from=builder /app/derper /app/derper
+
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl https://127.0.0.1 || exit 1
 
 # build self-signed certs && start derper
 CMD bash /app/build_cert.sh $DERP_HOST $DERP_CERTS /app/san.conf && \
