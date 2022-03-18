@@ -13,17 +13,13 @@ ENV MODIFIED_DERPER_GIT=https://github.com/yangchuansheng/tailscale.git
 RUN apt-get update && \
     apt-get install -y git curl wget tar
 
-# install golang 1.17
+# install golang
 RUN wget $GOLANG_URL -O golang.tar.gz && \
     tar xf golang.tar.gz -C /usr/local && \
     rm golang.tar.gz
 
 # build modified derper
-RUN git clone $MODIFIED_DERPER_GIT tailscale --depth 1 && \
-    cd /app/tailscale/cmd/derper && \
-    /usr/local/go/bin/go build -ldflags "-s -w" -o /app/derper && \
-    cd /app && \
-    rm -rf /app/tailscale
+RUN go install github.com/yangchuansheng/tailscale/cmd/derper@dev
 
 FROM ubuntu:20.04
 WORKDIR /app
@@ -41,7 +37,7 @@ RUN apt-get update && \
     apt-get install -y openssl
 
 COPY build_cert.sh /app/
-COPY --from=builder /app/derper /app/derper
+COPY --from=builder /go/bin/derper /app/derper
 
 # build self-signed certs && start derper
 CMD bash /app/build_cert.sh $DERP_HOST $DERP_CERTS /app/san.conf && \
