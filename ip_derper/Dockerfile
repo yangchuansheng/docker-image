@@ -1,22 +1,10 @@
-FROM ubuntu:20.04 AS builder
+FROM golang:latest AS builder
 WORKDIR /app
-
-ARG DEBIAN_FRONTEND=noninteractive
 
 # ========= CONFIG =========
 # - download links
-ENV GOLANG_URL=https://go.dev/dl/go1.18.linux-amd64.tar.gz
 ENV MODIFIED_DERPER_GIT=https://github.com/yangchuansheng/tailscale.git
 # ==========================
-
-# apt
-RUN apt-get update && \
-    apt-get install -y git curl wget tar
-
-# install golang
-RUN wget $GOLANG_URL -O golang.tar.gz && \
-    tar xf golang.tar.gz -C /usr/local && \
-    rm golang.tar.gz
 
 # build modified derper
 RUN go install github.com/yangchuansheng/tailscale/cmd/derper@dev
