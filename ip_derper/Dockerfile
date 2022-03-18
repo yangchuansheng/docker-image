@@ -7,7 +7,11 @@ ENV MODIFIED_DERPER_GIT=https://github.com/yangchuansheng/tailscale.git
 # ==========================
 
 # build modified derper
-RUN go install github.com/yangchuansheng/tailscale/cmd/derper@dev
+RUN git clone -b dev $MODIFIED_DERPER_GIT tailscale --depth 1 && \
+    cd /app/tailscale/cmd/derper && \
+    /usr/local/go/bin/go build -ldflags "-s -w" -o /app/derper && \
+    cd /app && \
+    rm -rf /app/tailscale
 
 FROM ubuntu:20.04
 WORKDIR /app
@@ -25,7 +29,7 @@ RUN apt-get update && \
     apt-get install -y openssl
 
 COPY build_cert.sh /app/
-COPY --from=builder /go/bin/derper /app/derper
+COPY --from=builder /app/derper /app/derper
 
 # build self-signed certs && start derper
 CMD bash /app/build_cert.sh $DERP_HOST $DERP_CERTS /app/san.conf && \
