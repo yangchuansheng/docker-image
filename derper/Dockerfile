@@ -1,4 +1,7 @@
 FROM golang:latest AS builder
+
+LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
+
 WORKDIR /app
 
 # https://tailscale.com/kb/1118/custom-derp-servers/
