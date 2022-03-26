@@ -3,11 +3,11 @@ WORKDIR /app
 
 # ========= CONFIG =========
 # - download links
-ENV MODIFIED_DERPER_GIT=https://github.com/yangchuansheng/tailscale.git
+ENV MODIFIED_DERPER_GIT=https://github.com/yangchuansheng/ip_derper.git
 # ==========================
 
 # build modified derper
-RUN git clone -b dev $MODIFIED_DERPER_GIT tailscale --depth 1 && \
+RUN git clone -b gh-pages $MODIFIED_DERPER_GIT tailscale --depth 1 && \
     cd /app/tailscale/cmd/derper && \
     /usr/local/go/bin/go build -ldflags "-s -w" -o /app/derper && \
     cd /app && \
