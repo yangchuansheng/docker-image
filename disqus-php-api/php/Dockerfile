@@ -1,7 +1,7 @@
 FROM php:7.4.11-fpm
 
 LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
-LABEL maintainer="disqus-php-api Docker Maintainers https://fuckcloudnative.io"
+LABEL maintainer="disqus-php-api Docker Maintainers https://icloudnative.io"
 
 RUN set -x; \
     apt update; \
@@ -9,9 +9,9 @@ RUN set -x; \
     cd /root; \
     git clone https://github.com/fooleap/disqus-php-api; \
     cp -r ./disqus-php-api/api/* /var/www/html/; \
-    sed -i "s#cn.gravatar.com#gravatar.fuckcloudnative.io#g" $(egrep -rl "cn.gravatar.com" /var/www/html/); \
-    sed -i "s#a.disquscdn.com/images/noavatar92.png#jsdelivr.fuckcloudnative.io/gh/yangchuansheng/imghosting/img/20200621114024.png#g" $(egrep -rl "a.disquscdn.com" /var/www/html/); \
-    sed -i "s#github.githubassets.com/images/icons/emoji/unicode#jsdelivr.fuckcloudnative.io/gh/yangchuansheng/imghosting/emoji#g" $(egrep -rl "github.githubassets.com" /var/www/html/); \
+    sed -i "s#cn.gravatar.com#gravatar.icloudnative.io#g" $(egrep -rl "cn.gravatar.com" /var/www/html/); \
+    sed -i "s#a.disquscdn.com/images/noavatar92.png#jsdelivr.icloudnative.io/gh/yangchuansheng/imghosting/img/20200621114024.png#g" $(egrep -rl "a.disquscdn.com" /var/www/html/); \
+    sed -i "s#github.githubassets.com/images/icons/emoji/unicode#jsdelivr.icloudnative.io/gh/yangchuansheng/github-emoji#g" $(egrep -rl "github.githubassets.com" /var/www/html/); \
     sed -i "s#'PUBLIC_KEY', ''#'PUBLIC_KEY', getenv('PUBLIC_KEY')#g" /var/www/html/config.php; \
     sed -i "s#'SECRET_KEY', ''#'SECRET_KEY', getenv('SECRET_KEY')#g" /var/www/html/config.php; \
     sed -i "s#'DISQUS_USERNAME', ''#'DISQUS_USERNAME', getenv('USERNAME')#g" /var/www/html/config.php; \
