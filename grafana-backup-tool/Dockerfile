@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-LABEL maintainer="grafana-backup-tool Docker Maintainers https://fuckcloudnative.io"
+LABEL maintainer="grafana-backup-tool Docker Maintainers https://icloudnative.io"
 
 ENV ARCHIVE_FILE ""
 
