@@ -116,6 +116,8 @@ FROM base AS build
 # Build static binary with musl built-in
 RUN RUSTFLAGS="$(cat /tmp/rustflags)" \
     CC="$(cat /tmp/musl)-gcc" \
+    git clone https://github.com/MindFlavor/prometheus_wireguard_exporter.git && \
+    cd prometheus_wireguard_exporter && \
     cargo build --target "$(cat /tmp/rusttarget)" --release && \
     mv target/*-linux-*/release/prometheus_wireguard_exporter /tmp/binary
 RUN description="$(file /tmp/binary)" && \
@@ -124,7 +126,7 @@ RUN description="$(file /tmp/binary)" && \
       echo "binary is not statically built!" && exit 1; \
     fi
 
-FROM alpine:${ALPINE_VERSION}
+FROM alpine:3.14
 EXPOSE 9586/tcp
 WORKDIR /usr/local/bin
 RUN apk add --no-cache --q tini && \
