@@ -3,7 +3,7 @@
 # Description: Build and push wireguard_exporter Docker image
 # Lisence: MIT
 # Author: Ryan
-# Blog: https://fuckcloudnative.io
+# Blog: https://icloudnative.io
 #=================================================
 
 name: Build and push wireguard_exporter Docker image
@@ -15,13 +15,11 @@ on:
     branches: [ master ]
     paths: 
       - 'prometheus_wireguard_exporter/Dockerfile'
-      - '.github/workflows/wireguard_exporter.yml'
+      - '.github/workflows/prometheus_wireguard_exporter.yml'
   pull_request:
     branches: [ master ]
     paths: 
       - 'prometheus_wireguard_exporter/Dockerfile'
-  watch:
-    types: started
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -64,8 +62,8 @@ jobs:
         context: prometheus_wireguard_exporter
         push: true
         tags: |
-          yangchuansheng/wireguard_exporter:latest
-          ghcr.io/yangchuansheng/wireguard_exporter:latest
+          yangchuansheng/prometheus_wireguard_exporter:latest
+          ghcr.io/yangchuansheng/prometheus_wireguard_exporter:latest
 
     #- name: Update repo description
     #  uses: peter-evans/dockerhub-description@v2
