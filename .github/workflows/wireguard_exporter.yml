@@ -61,7 +61,7 @@ jobs:
       with:
         file: 'prometheus_wireguard_exporter/Dockerfile'
         platforms: linux/amd64
-        context: wireguard_exporter
+        context: prometheus_wireguard_exporter
         push: true
         tags: |
           yangchuansheng/wireguard_exporter:latest
