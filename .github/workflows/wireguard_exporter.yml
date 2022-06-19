@@ -14,12 +14,12 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'wireguard_exporter/Dockerfile'
+      - 'prometheus_wireguard_exporter/Dockerfile'
       - '.github/workflows/wireguard_exporter.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'wireguard_exporter/Dockerfile'
+      - 'prometheus_wireguard_exporter/Dockerfile'
   watch:
     types: started
 
@@ -33,7 +33,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -57,7 +59,7 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'wireguard_exporter/Dockerfile'
+        file: 'prometheus_wireguard_exporter/Dockerfile'
         platforms: linux/amd64
         context: wireguard_exporter
         push: true
