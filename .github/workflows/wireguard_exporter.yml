@@ -65,10 +65,10 @@ jobs:
           yangchuansheng/wireguard_exporter:latest
           ghcr.io/yangchuansheng/wireguard_exporter:latest
 
-    - name: Update repo description
-      uses: peter-evans/dockerhub-description@v2
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKERHUB_REPOSITORY: yangchuansheng/wireguard_exporter
+    #- name: Update repo description
+    #  uses: peter-evans/dockerhub-description@v2
+    #  env:
+    #    DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    #    DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    #    DOCKERHUB_REPOSITORY: yangchuansheng/wireguard_exporter
         # README_FILEPATH: wireguard_exporter/readme.md
