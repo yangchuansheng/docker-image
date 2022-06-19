@@ -1,5 +1,3 @@
-FROM rust as builder
-
 LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
 LABEL description="Docker container for building prometheus exporter for wireguard."
 LABEL maintainer="Ryan Yang <yangchuansheng33@gmail.com>"
