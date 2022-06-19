@@ -1,7 +1,3 @@
-LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
-LABEL description="Docker container for building prometheus exporter for wireguard."
-LABEL maintainer="Ryan Yang <yangchuansheng33@gmail.com>"
-
 ARG BUILDPLATFORM=linux/amd64
 
 ARG ALPINE_VERSION=3.14
@@ -125,6 +121,11 @@ RUN description="$(file /tmp/binary)" && \
     fi
 
 FROM alpine:3.14
+
+LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
+LABEL description="Docker container for building prometheus exporter for wireguard."
+LABEL maintainer="Ryan Yang <yangchuansheng33@gmail.com>"
+
 EXPOSE 9586/tcp
 WORKDIR /usr/local/bin
 RUN apk add --no-cache --q tini && \
