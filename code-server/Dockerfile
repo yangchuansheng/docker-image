@@ -18,7 +18,8 @@ ENV RUSTUP_HOME=/config/rustup \
     
 RUN \
   echo "**** install my tools ****"; \
-  apt-get install -y gcc gdb wget; \
+  apt update; \
+  apt install -y gcc gdb wget; \
   curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   dpkgArch="$(dpkg --print-architecture)"; \
