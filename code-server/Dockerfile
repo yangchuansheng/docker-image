@@ -6,10 +6,7 @@ ARG GID=1000
 ## change owner and group for /config, or else hit "error EACCES: permission denied, mkdir '/config/.config'"
 RUN chown $UID:$GID -R /config
 
-## We have to install extensions as host UID:GID so the code-server can only identify the extensions when we start
-## the container by forwarding host UID/GID later.
-USER $UID:$GID
-
+USER root
 
 # environment settings
 ENV HOME="/config"
@@ -39,6 +36,10 @@ RUN \
   ./rustup-init -y --no-modify-path --profile minimal --default-toolchain $RUST_VERSION --default-host ${rustArch}; \
   rm rustup-init; \
   chmod -R a+w $RUSTUP_HOME $CARGO_HOME
+  
+## We have to install extensions as host UID:GID so the code-server can only identify the extensions when we start
+## the container by forwarding host UID/GID later.
+USER $UID:$GID
   
 ## Because of taking user by $UID:$GID, container can't identify the HOME(~) variable, so we need to
 ## declare HOME explicitely, or else hit err "info  Wrote default config file to ~/.config/code-server/config.yaml" 
