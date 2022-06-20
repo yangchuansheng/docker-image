@@ -1,13 +1,5 @@
 FROM ghcr.io/linuxserver/code-server:4.4.0
 
-ARG UID=1000
-ARG GID=1000
-
-## change owner and group for /config, or else hit "error EACCES: permission denied, mkdir '/config/.config'"
-RUN chown $UID:$GID -R /config
-
-USER root
-
 # environment settings
 ENV HOME="/config"
 ENV HUGO_VERSION="0.85.0"
@@ -38,14 +30,10 @@ RUN \
   rm rustup-init; \
   chmod -R a+w $RUSTUP_HOME $CARGO_HOME
   
-## We have to install extensions as host UID:GID so the code-server can only identify the extensions when we start
-## the container by forwarding host UID/GID later.
-USER $UID:$GID
-  
 ## Because of taking user by $UID:$GID, container can't identify the HOME(~) variable, so we need to
 ## declare HOME explicitely, or else hit err "info  Wrote default config file to ~/.config/code-server/config.yaml" 
-RUN HOME=/config /app/code-server/bin/code-server \
-    --user-data-dir=/config/.local/share/code-server \
+RUN /app/code-server/bin/code-server \
+    --user-data-dir=${HOME}/.local/share/code-server \
     --install-extension bungcip.better-toml \
     --install-extension CoenraadS.bracket-pair-colorizer-2 \
     --install-extension formulahendry.code-runner \
