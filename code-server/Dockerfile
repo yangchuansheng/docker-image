@@ -48,7 +48,6 @@ RUN HOME=/config /app/code-server/bin/code-server \
     --user-data-dir=/config/.local/share/code-server \
     --install-extension bungcip.better-toml \
     --install-extension CoenraadS.bracket-pair-colorizer-2 \
-    --install-extension ericadamski.carbon-now-sh \
     --install-extension formulahendry.code-runner \
     --install-extension Shan.code-settings-sync \
     --install-extension adpyke.codesnap
