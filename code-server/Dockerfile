@@ -44,7 +44,7 @@ USER $UID:$GID
   
 ## Because of taking user by $UID:$GID, container can't identify the HOME(~) variable, so we need to
 ## declare HOME explicitely, or else hit err "info  Wrote default config file to ~/.config/code-server/config.yaml" 
-RUN HOME=/config /usr/local/bin/code-server \
+RUN HOME=/config /app/code-server/bin/code-server \
     --user-data-dir=/config/.local/share/code-server \
     --install-extension bungcip.better-toml \
     --install-extension CoenraadS.bracket-pair-colorizer-2 \
