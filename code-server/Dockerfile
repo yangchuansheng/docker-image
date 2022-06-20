@@ -50,4 +50,5 @@ RUN HOME=/config /app/code-server/bin/code-server \
     --install-extension CoenraadS.bracket-pair-colorizer-2 \
     --install-extension formulahendry.code-runner \
     --install-extension Shan.code-settings-sync \
-    --install-extension adpyke.codesnap
+    --install-extension adpyke.codesnap \
+    --install-extension naumovs.color-highlight
