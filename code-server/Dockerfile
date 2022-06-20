@@ -1,11 +1,15 @@
 FROM ghcr.io/linuxserver/baseimage-ubuntu:bionic
 
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-ARG CODE_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="aptalca"
+ARG UID=1000
+ARG GID=1000
+
+## change owner and group for /config, or else hit "error EACCES: permission denied, mkdir '/config/.config'"
+RUN chown $UID:$GID -R /config
+
+## We have to install extensions as host UID:GID so the code-server can only identify the extensions when we start
+## the container by forwarding host UID/GID later.
+USER $UID:$GID
+
 
 # environment settings
 ENV HOME="/config"
@@ -14,22 +18,12 @@ ENV RUSTUP_HOME=/config/rustup \
     CARGO_HOME=/config/cargo \
     PATH=/config/cargo/bin:$PATH \
     RUST_VERSION=1.58.0
-
+    
 RUN \
-  echo "**** install node repo ****" && \
-  apt-get update && \
-  apt-get install -y \
-    gnupg && \
-  curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-  echo 'deb https://deb.nodesource.com/node_14.x bionic main' \
-    > /etc/apt/sources.list.d/nodesource.list && \
-  curl -s https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo 'deb https://dl.yarnpkg.com/debian/ stable main' \
-    > /etc/apt/sources.list.d/yarn.list && \
-  echo "**** install my tools ****" && \
-  apt-get install -y gcc gdb && \
-  curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb && \
-  dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb && \
+  echo "**** install my tools ****"; \
+  apt-get install -y gcc gdb; \
+  curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
+  dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   dpkgArch="$(dpkg --print-architecture)"; \
   case "${dpkgArch##*-}" in \
       amd64) rustArch='x86_64-unknown-linux-gnu'; rustupSha256='3dc5ef50861ee18657f9db2eeb7392f9c2a6c95c90ab41e45ab4ca71476b4338' ;; \
@@ -44,48 +38,15 @@ RUN \
   chmod +x rustup-init; \
   ./rustup-init -y --no-modify-path --profile minimal --default-toolchain $RUST_VERSION --default-host ${rustArch}; \
   rm rustup-init; \
-  chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
-  echo "**** install build dependencies ****" && \
-  apt-get update && \
-  apt-get install -y \
-    build-essential \
-    libx11-dev \
-    libxkbfile-dev \
-    libsecret-1-dev \
-    pkg-config && \
-  echo "**** install runtime dependencies ****" && \
-  apt-get install -y \
-    git \
-    jq \
-    nano \
-    net-tools \
-    nodejs \
-    sudo \
-    yarn && \
-  echo "**** install code-server ****" && \
-  if [ -z ${CODE_RELEASE+x} ]; then \
-    CODE_RELEASE=$(curl -sX GET https://registry.yarnpkg.com/code-server \
-    | jq -r '."dist-tags".latest' | sed 's|^|v|'); \
-  fi && \
-  CODE_VERSION=$(echo "$CODE_RELEASE" | awk '{print substr($1,2); }') && \
-  yarn config set network-timeout 600000 -g && \
-  yarn --production --verbose --frozen-lockfile global add code-server@"$CODE_VERSION" font-spider-plus && \
-  yarn cache clean && \
-  echo "**** clean up ****" && \
-  apt-get purge --auto-remove -y \
-    build-essential \
-    libx11-dev \
-    libxkbfile-dev \
-    libsecret-1-dev \
-    pkg-config && \
-  apt-get clean && \
-  rm -rf \
-    /tmp/* \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
-
-# add local files
-COPY /root /
-
-# ports and volumes
-EXPOSE 8443
+  chmod -R a+w $RUSTUP_HOME $CARGO_HOME
+  
+## Because of taking user by $UID:$GID, container can't identify the HOME(~) variable, so we need to
+## declare HOME explicitely, or else hit err "info  Wrote default config file to ~/.config/code-server/config.yaml" 
+RUN HOME=/config code-server \
+	--user-data-dir=/config/.local/share/code-server \
+	--install-extension bungcip.better-toml \
+    --install-extension CoenraadS.bracket-pair-colorizer-2 \
+    --install-extension ericadamski.carbon-now-sh \
+    --install-extension formulahendry.code-runner \
+    --install-extension Shan.code-settings-sync \
+    --install-extension adpyke.codesnap
