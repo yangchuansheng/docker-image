@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:bionic
+FROM ghcr.io/linuxserver/code-server:4.4.0
 
 ARG UID=1000
 ARG GID=1000
