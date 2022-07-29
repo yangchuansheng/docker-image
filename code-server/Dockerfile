@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/code-server:4.4.0
+FROM ghcr.io/linuxserver/code-server:latest
 
 # environment settings
 ENV HOME="/config"
@@ -11,9 +11,12 @@ ENV RUSTUP_HOME=/config/rustup \
 RUN \
   echo "**** install my tools ****"; \
   apt update; \
-  apt install -y gcc gdb wget git; \
+  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
+  apt install -y gcc gdb wget git nodejs; \
+  rm -rf /var/lib/apt/lists/*; \
   curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
+  rm -rf hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   dpkgArch="$(dpkg --print-architecture)"; \
   case "${dpkgArch##*-}" in \
       amd64) rustArch='x86_64-unknown-linux-gnu'; rustupSha256='3dc5ef50861ee18657f9db2eeb7392f9c2a6c95c90ab41e45ab4ca71476b4338' ;; \
