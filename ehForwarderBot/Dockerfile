@@ -20,6 +20,7 @@ RUN set -ex \
       openssl-dev \
       libwebp-dev \
    && pip3 install ehforwarderbot efb-telegram-master python-telegram-bot \
+   && pip uninstall efb-wechat-slave \
    && pip3 install git+https://github.com/ehForwarderBot/efb-wechat-slave \
    && pip3 install --no-deps --force-reinstall Pillow \
    && apk del .build-deps \
