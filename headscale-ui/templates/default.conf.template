@@ -1,4 +1,4 @@
-iserver {
+server {
     listen       ${NGINX_SSL_PORT} ssl;
     server_name  router.icloudnative.io;
 
