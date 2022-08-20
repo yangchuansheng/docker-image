@@ -1,5 +1,3 @@
-LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
-
 # arguments
 ARG VERSION="master"
 # Branch to check out
@@ -33,6 +31,8 @@ RUN /staging/scripts/1-image-build.sh
 #####
 
 FROM nginx:latest
+
+LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
 
 COPY templates /etc/nginx/templates
 COPY --from=build /staging/${PROJECT_NAME}/build /usr/share/nginx/html/web
