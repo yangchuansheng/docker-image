@@ -1,3 +1,5 @@
+LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
+
 # arguments
 ARG VERSION="master"
 # Branch to check out
