@@ -34,5 +34,10 @@ FROM nginx:latest
 
 LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-image
 
+#environment variables
+ENV PROJECT_NAME="headscale-ui"
+# URL for the github/git location
+ENV PROJECT_URL="https://github.com/gurucomputing/headscale-ui"
+
 COPY templates /etc/nginx/templates
 COPY --from=build /staging/${PROJECT_NAME}/build /usr/share/nginx/html/web
