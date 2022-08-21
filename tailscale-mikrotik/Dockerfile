@@ -23,9 +23,6 @@ FROM golang:1.18-alpine AS build-env
 
 WORKDIR /go/src/tailscale
 
-RUN git clone https://github.com/tailscale/tailscale.git; \
-    cd tailscale && eval $(./build_dist.sh shellvars) && cd ..
-
 COPY tailscale/go.mod tailscale/go.sum ./
 RUN go mod download
 
