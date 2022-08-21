@@ -52,6 +52,12 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
       run: echo ${{ env.password }} | docker login ghcr.io -u ${{ env.username }} --password-stdin
+      
+    - name: Prepare
+      run: |-
+        cd tailscale-mikrotik
+        git clone https://github.com/tailscale/tailscale.git
+        cd tailscale && eval $(./build_dist.sh shellvars) && cd ..
 
     # Runs a single command using the runners shell
     - name: Build and push Docker images to docker.io and ghcr.io
