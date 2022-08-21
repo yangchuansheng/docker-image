@@ -24,7 +24,7 @@
 # Set PLATFORM as required for your router model. See:
 # https://mikrotik.com/products/matrix
 #
-PLATFORM="linux/arm/v7"
+PLATFORM="linux/amd64"
 
 set -eu
 
