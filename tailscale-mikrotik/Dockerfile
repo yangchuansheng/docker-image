@@ -19,7 +19,7 @@
 #
 ############################################################################
 
-FROM golang:1.18-alpine AS build-env
+FROM golang:1.19-alpine AS build-env
 
 WORKDIR /go/src/tailscale
 
@@ -37,7 +37,7 @@ ARG VERSION_GIT_HASH=""
 ENV VERSION_GIT_HASH=$VERSION_GIT_HASH
 ARG TARGETARCH
 
-RUN GOARCH=amd64 go install -ldflags="\
+RUN GOARCH=$TARGETARCH go install -ldflags="\
       -X tailscale.com/version.Long=$VERSION_LONG \
       -X tailscale.com/version.Short=$VERSION_SHORT \
       -X tailscale.com/version.GitCommit=$VERSION_GIT_HASH" \
