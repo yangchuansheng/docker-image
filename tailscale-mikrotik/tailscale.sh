@@ -16,6 +16,9 @@ done
 # Start tailscaled and bring tailscale up 
 /usr/local/bin/tailscaled &
 until /usr/local/bin/tailscale up \
+        --accept-routes=true \
+	--accept-dns=false \
+	--login-server=${LOGIN_SERVER} \
 	--authkey=${AUTH_KEY} \
 	--advertise-routes="${ADVERTISE_ROUTES}"
 do
