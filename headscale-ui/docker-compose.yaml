@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  headscale-ui:
+    image: yangchuansheng/headscale-ui:latest
+    restart: always
+    container_name: headscale-ui
+    network_mode: host
+    volumes:
+      - <CERTIFICATE_PATH>:<CERTIFICATE_PATH>
+    environment:
+      - NGINX_SSL_PORT=<NGINX_SSL_PORT>
+      - NGINX_SSL_CRT=<NGINX_SSL_CRT>
+      - NGINX_SSL_KEY=<NGINX_SSL_KEY>
+      - HEADSCALE_PORT="http://<HEADSCALE_HOST>:<HEADSCALE_PORT>"
