@@ -20,7 +20,7 @@ server {
     }
 
     location / {
-        proxy_pass ${HEADSCALE_PORT};
+        proxy_pass ${HEADSCALE_URL};
     }
 
     #error_page  404              /404.html;
