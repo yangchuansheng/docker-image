@@ -1,5 +1,5 @@
 FROM python:alpine
-LABEL maintainer="ehForwarderBot Docker Maintainers https://fuckcloudnative.io"
+LABEL maintainer="ehForwarderBot Docker Maintainers https://icloudnative.io"
 
 ENV LANG C.UTF-8
 ENV TZ Asia/Shanghai
