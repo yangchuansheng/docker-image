@@ -31,7 +31,7 @@ RUN set -ex \
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
 
-COPY config.yaml /root/.ehforwarderbot/profiles/default/
+COPY config-cutecat.yaml /root/.ehforwarderbot/profiles/default/config.yaml
 
 VOLUME /root/.ehforwarderbot/profiles/default/blueset.telegram
 
