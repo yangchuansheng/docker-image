@@ -1,3 +1,6 @@
 [submodule "prometheus_wireguard_exporter"]
 	path = prometheus_wireguard_exporter
 	url = https://github.com/MindFlavor/prometheus_wireguard_exporter
+[submodule "flowerss-bot"]
+	path = flowerss-bot
+	url = https://github.com/indes/flowerss-bot
