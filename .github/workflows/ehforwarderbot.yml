@@ -70,13 +70,13 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'ehForwarderBot/Dockerfile.cutecat'
+        file: 'ehForwarderBot/Dockerfile.comwechat'
         platforms: linux/amd64
         context: ehForwarderBot
         push: true
         tags: |
-          yangchuansheng/ehforwarderbot:cutecat
-          ghcr.io/yangchuansheng/ehforwarderbot:cutecat
+          yangchuansheng/ehforwarderbot:comwechat
+          ghcr.io/yangchuansheng/ehforwarderbot:comwechat
 
     #- name: Update repo description
       #uses: peter-evans/dockerhub-description@v2
