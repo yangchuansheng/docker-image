@@ -19,7 +19,7 @@ RUN set -ex \
       libffi-dev \
       openssl-dev \
       libwebp-dev \
-   && pip3 install git+https://github.com/mlch911/efb-telegram-master \
+   && pip3 install git+https://github.com/QQ-War/efb-telegram-master.git \
    && pip3 install ehforwarderbot python-telegram-bot \
    && pip uninstall efb-wechat-slave \
    && pip3 install git+https://github.com/ehForwarderBot/efb-wechat-slave \
