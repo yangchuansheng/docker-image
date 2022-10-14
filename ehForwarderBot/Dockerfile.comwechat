@@ -22,16 +22,16 @@ RUN set -ex \
    && pip3 install git+https://github.com/mlch911/efb-telegram-master \
    && pip3 install ehforwarderbot python-telegram-bot \
    && pip uninstall efb-wechat-slave \
-   && pip3 install git+https://github.com/0honus0/python-CuteCat-iHttp.git \
-   && pip3 install git+https://github.com/0honus0/efb-wechat-cutecat-slave.git \
+   && pip3 install git+https://github.com/0honus0/python-comwechatrobot-http.git \
+   && pip3 install git+https://github.com/0honus0/efb-wechat-comwechat-slave.git \
    && pip3 install --no-deps --force-reinstall Pillow \
-   && pip3 install --ignore-installed PyYAML TgCrypto lottie cairosvg \
+   && pip3 install --ignore-installed PyYAML TgCrypto \
    && mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram /root/.ehforwarderbot/modules/
    
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
 
-COPY config-cutecat.yaml /root/.ehforwarderbot/profiles/default/config.yaml
+COPY config-comwechat.yaml /root/.ehforwarderbot/profiles/default/config.yaml
 
 VOLUME /root/.ehforwarderbot/profiles/default/blueset.telegram
 
