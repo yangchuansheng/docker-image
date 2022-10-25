@@ -25,7 +25,7 @@ RUN set -ex \
    && pip3 install git+https://github.com/0honus0/python-comwechatrobot-http.git \
    && pip3 install git+https://github.com/0honus0/efb-wechat-comwechat-slave.git \
    && pip3 install --no-deps --force-reinstall Pillow \
-   && pip3 install --ignore-installed PyYAML TgCrypto \
+   && pip3 install --ignore-installed PyYAML TgCrypto simplejson \
    && mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram /root/.ehforwarderbot/modules/
    
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
