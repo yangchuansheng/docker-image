@@ -1,3 +1,5 @@
 master_channel: blueset.telegram
 slave_channels:
 - honus.comwechat
+middlewares:
+- QQ_War.keyword_reply
