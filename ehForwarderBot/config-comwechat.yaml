@@ -3,3 +3,4 @@ slave_channels:
 - honus.comwechat
 middlewares:
 - QQ_War.keyword_reply
+- QQ_War.message_merge
