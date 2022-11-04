@@ -2,7 +2,7 @@ FROM python:alpine AS venv
 
 RUN set -ex; \
     apk --update upgrade; \
-    apk --update add --no-cache tzdata ca-certificates python3-dev py3-pillow py3-ruamel.yaml libmagic ffmpeg git gcc zlib-dev jpeg-dev musl-dev libffi-dev openssl-dev libwebp-dev
+    apk --update add --no-cache python3-dev py3-pillow py3-ruamel.yaml libmagic ffmpeg git gcc zlib-dev jpeg-dev musl-dev libffi-dev openssl-dev libwebp-dev
 RUN python -m venv --copies /app/venv; \
     . /app/venv/bin/activate; \
     pip3 install git+https://github.com/QQ-War/efb-telegram-master.git; \
@@ -27,7 +27,7 @@ COPY config-comwechat.yaml /root/.ehforwarderbot/profiles/default/config.yaml
 
 RUN set -ex; \
     apk --update upgrade; \
-    apk --update add --no-cache tzdata ffmpeg; \
+    apk --update add --no-cache tzdata libmagic ffmpeg; \
     rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*; \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
     echo "Asia/Shanghai" > /etc/timezone; \
