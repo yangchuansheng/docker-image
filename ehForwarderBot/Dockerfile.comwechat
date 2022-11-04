@@ -4,37 +4,22 @@ LABEL maintainer="ehForwarderBot Docker Maintainers https://icloudnative.io"
 ENV LANG C.UTF-8
 ENV TZ Asia/Shanghai
 
-RUN set -ex \
-   && apk --update upgrade \
-      apk --update add --no-cache \
-      tzdata \
-      ca-certificates \
-      python3-dev \
-      py3-pillow \
-      py3-ruamel.yaml \
-      libmagic \
-      ffmpeg \
-      git \
-      gcc \
-      zlib-dev \
-      jpeg-dev \
-      musl-dev \
-      libffi-dev \
-      openssl-dev \
-      libwebp-dev \
-   && pip3 install git+https://github.com/QQ-War/efb-telegram-master.git \
-   && pip3 install ehforwarderbot python-telegram-bot \
-   && pip3 install git+https://github.com/0honus0/python-comwechatrobot-http.git \
-   && pip3 install git+https://github.com/0honus0/efb-wechat-comwechat-slave.git \
-   && pip3 install git+https://github.com/QQ-War/efb-keyword-reply.git \
-   && pip3 install git+https://github.com/QQ-War/efb_message_merge.git \
-   && pip3 install --no-deps --force-reinstall Pillow \
-   && pip3 install --ignore-installed PyYAML TgCrypto simplejson \
-   && mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram /root/.ehforwarderbot/modules/ \
-   && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
+RUN set -ex; \
+    apk --update upgrade; \
+    apk --update add --no-cache tzdata ca-certificates python3-dev py3-pillow py3-ruamel.yaml libmagic ffmpeg git gcc zlib-dev jpeg-dev musl-dev libffi-dev openssl-dev libwebp-dev; \
+    pip3 install git+https://github.com/QQ-War/efb-telegram-master.git; \
+    pip3 install ehforwarderbot python-telegram-bot; \
+    pip3 install git+https://github.com/0honus0/python-comwechatrobot-http.git; \
+    pip3 install git+https://github.com/0honus0/efb-wechat-comwechat-slave.git; \
+    pip3 install git+https://github.com/QQ-War/efb-keyword-reply.git; \
+    pip3 install git+https://github.com/QQ-War/efb_message_merge.git; \
+    pip3 install --no-deps --force-reinstall Pillow; \
+    pip3 install --ignore-installed PyYAML TgCrypto simplejson; \
+    mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram /root/.ehforwarderbot/modules/; \
+    rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
    
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
+    echo "Asia/Shanghai" > /etc/timezone
 
 COPY config-comwechat.yaml /root/.ehforwarderbot/profiles/default/config.yaml
 
