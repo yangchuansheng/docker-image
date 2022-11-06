@@ -8,5 +8,4 @@ RUN \
   git clone https://github.com/cs50/libcs50; \
   cd libcs50 && make install
   
-RUN chsh -s ~/.zshrc
-    
+RUN chsh -s /usr/bin/zsh
