@@ -7,4 +7,6 @@ RUN \
   rm -rf /var/lib/apt/lists/*; \
   git clone https://github.com/cs50/libcs50; \
   cd libcs50 && make install
+  
+RUN RUN chsh -s ~/.zshrc
     
