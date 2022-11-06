@@ -12,8 +12,11 @@ RUN \
   echo "**** install my tools ****"; \
   apt update; \
   curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
-  apt install -y gcc gdb wget git nodejs; \
+  apt install -y gcc gdb wget git nodejs make; \
   rm -rf /var/lib/apt/lists/*; \
+  git clone https://github.com/cs50/libcs50; \
+  cd libcs50 && make install; \
+  cd ..; \
   curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
   rm -rf hugo_extended_${HUGO_VERSION}_Linux-64bit.deb; \
