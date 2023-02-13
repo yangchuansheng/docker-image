@@ -4,3 +4,6 @@
 [submodule "chatgpt-telegram-bot"]
 	path = chatgpt-telegram-bot
 	url = https://github.com/RainEggplant/chatgpt-telegram-bot
+[submodule "ChatGPT-Proxy"]
+	path = ChatGPT-Proxy
+	url = https://github.com/acheong08/ChatGPT-Proxy

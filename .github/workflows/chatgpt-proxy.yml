@@ -1,12 +1,12 @@
 #=================================================
 # https://github.com/yangchuansheng/docker-image
-# Description: Build and push chatgpt-telegram-bot Docker image
+# Description: Build and push chatgpt-proxy Docker image
 # Lisence: MIT
 # Author: Carson Yang
 # Blog: https://icloudnative.io
 #=================================================
 
-name: Build and push chatgpt-telegram-bot Docker image
+name: Build and push chatgpt-proxy Docker image
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -14,12 +14,12 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'chatgpt-telegram-bot/Dockerfile'
-      - '.github/workflows/chatgpt-telegram-bot.yml'
+      - 'ChatGPT-Proxy/Dockerfile'
+      - '.github/workflows/chatgpt-proxy.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'chatgpt-telegram-bot/Dockerfile'
+      - 'ChatGPT-Proxy/Dockerfile'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -57,13 +57,13 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'chatgpt-telegram-bot/Dockerfile'
+        file: 'ChatGPT-Proxy/Dockerfile'
         platforms: linux/amd64
-        context: chatgpt-telegram-bot
+        context: ChatGPT-Proxy
         push: true
         tags: |
-          yangchuansheng/chatgpt-telegram-bot:latest
-          ghcr.io/yangchuansheng/chatgpt-telegram-bot:latest
+          yangchuansheng/chatgpt-proxy:latest
+          ghcr.io/yangchuansheng/chatgpt-proxy:latest
 
     #- name: Update repo description
     #  uses: peter-evans/dockerhub-description@v2
