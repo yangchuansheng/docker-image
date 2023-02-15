@@ -11,6 +11,7 @@ name: Build and push chatgpt-telegram-bot Docker image
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
     paths: 
