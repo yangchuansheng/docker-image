@@ -14,7 +14,7 @@ RUN npm install pnpm -g && pnpm install && pnpm run build
 # service
 FROM node:lts-alpine
 
-COPY /service /app
+COPY --from=builder /app/service /app
 COPY --from=builder /app/dist /app/public
 
 WORKDIR /app
