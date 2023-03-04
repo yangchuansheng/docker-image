@@ -12,7 +12,8 @@ RUN sed -i '/setting.socks/a\ \ \ \ \ \ <p>🛒 <a class="text-blue-600" href="h
     sed -i '/setting.socks/a\ \ \ \ \ \ <p>群组： <a class="text-blue-600 dark:text-blue-500" href="https://t.me/littleb_tech" target="_blank"> https://t.me/fuck_you_chatgpt </a></p>' ./src/components/common/Setting/About.vue; \
     sed -i 's#https://github.com/Chanzhaoyu/chatgpt-bot#https://t.me/fuck_you_chatgpt#g' ./src/store/modules/user/helper.ts; \
     sed -i 's/Star on/欢迎加入/g' ./src/store/modules/user/helper.ts; \
-    sed -i 's/GitHub/群组/g' ./src/store/modules/user/helper.ts
+    sed -i 's/GitHub/群组/g' ./src/store/modules/user/helper.ts; \
+    sed -i 's/GitHub/群组/g' ./src/components/custom/GithubSite.vue
 
 RUN npm install pnpm -g && pnpm install && pnpm run build
 
