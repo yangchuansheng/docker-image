@@ -7,7 +7,7 @@ RUN git clone https://github.com/Chanzhaoyu/chatgpt-web /app
 
 WORKDIR /app
 
-RUN sed -i '/如果你觉得此项目对你有帮助/a\ \ \ \ \ \ \ \ \ \ <br>🛒 <a class="text-blue-600" href="https://shop.terobox.com/?from=1069" target="_blank">ChatGPT Plus 订阅账号购买</a>' /app/src/components/common/Setting/index.vue
+RUN sed -i '/如果你觉得此项目对你有帮助/a\ \ \ \ \ \ \ \ \ \ <br>🛒 <a class="text-blue-600" href="https://shop.terobox.com/?from=1069" target="_blank">ChatGPT Plus 订阅账号购买</a>' /src/components/common/Setting/About.vue
 
 RUN npm install pnpm -g && pnpm install && pnpm run build
 
