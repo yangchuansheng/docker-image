@@ -15,12 +15,12 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - 'chatgpt-telegram-bot/Dockerfile'
+      - 'chatgpt-telegram-bot/**'
       - '.github/workflows/chatgpt-telegram-bot.yml'
   pull_request:
     branches: [ master ]
     paths: 
-      - 'chatgpt-telegram-bot/Dockerfile'
+      - 'chatgpt-telegram-bot/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -58,7 +58,7 @@ jobs:
     - name: Build and push Docker images to docker.io and ghcr.io
       uses: docker/build-push-action@v2
       with:
-        file: 'chatgpt-telegram-bot/Dockerfile'
+        file: 'chatgpt-telegram-bot/Dockerfile.browser'
         platforms: linux/amd64
         context: chatgpt-telegram-bot
         push: true
