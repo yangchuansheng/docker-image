@@ -4,6 +4,9 @@ LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-i
 
 WORKDIR /app
 
+RUN apk update; \
+    apk add git
+
 RUN git clone https://github.com/zaigie/palworld-server-tool
 RUN cd palworld-server-tool; \
     make init; \
