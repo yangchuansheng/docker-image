@@ -5,8 +5,9 @@ LABEL org.opencontainers.image.source https://github.com/yangchuansheng/docker-i
 WORKDIR /app
 
 RUN git clone https://github.com/zaigie/palworld-server-tool
-RUN cd palworld-server-tool
-RUN make build
+RUN cd palworld-server-tool; \
+    make init; \
+    make build
 
 FROM alpine
 
