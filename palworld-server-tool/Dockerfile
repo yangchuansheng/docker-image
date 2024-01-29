@@ -6,7 +6,6 @@ WORKDIR /app
 
 RUN git clone https://github.com/zaigie/palworld-server-tool
 RUN cd palworld-server-tool
-RUN make init
 RUN make build
 
 FROM alpine
