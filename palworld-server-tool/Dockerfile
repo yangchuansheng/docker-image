@@ -13,6 +13,6 @@ FROM alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/dist/pst-server /app/pst-server
+COPY --from=builder /app/palworld-server-tool/dist/pst-server /app/pst-server
 
 CMD /app/pst-server -a ${RCON_HOST}:25575 -p ${RCON_PASSWORD}
