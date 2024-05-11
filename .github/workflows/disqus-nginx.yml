@@ -62,11 +62,3 @@ jobs:
         tags: |
           yangchuansheng/disqus-nginx:latest
           ghcr.io/yangchuansheng/disqus-nginx:latest
-
-    - name: Update repo description
-      uses: peter-evans/dockerhub-description@v2
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKERHUB_REPOSITORY: yangchuansheng/disqus-php-api
-        README_FILEPATH: disqus-php-api/nginx/readme.md
